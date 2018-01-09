@@ -30,5 +30,7 @@ If Docker isn't an option, you can download the binaries from the
 
 # [Instrumenting applications](Instrumentation.md)
 
+# [High-availability](HighAvailability.md)
+
 # [Advanced topics](AdvancedTopics.md)
 
