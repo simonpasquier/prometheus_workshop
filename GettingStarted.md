@@ -13,7 +13,8 @@ docker run -d --net=host --pid=host --name node_exporter prom/node-exporter:v0.1
 
 *node_exporter is usually not launched in Docker as it needs access to the
 system host. For simplicity and consistency, we'll use Docker for everything so
-we need the `--net=host` and `--pid=host` flags here.*
+we need the `--net=host` and `--pid=host` flags here. Note that non-root mount
+points aren't visible to node_exporter unless bind-mounted to the container.*
 
 Go to <http://localhost:9100/> and check the results.
 
