@@ -22,9 +22,14 @@ Go to <http://localhost:9100/> and check the results.
 ### Prometheus installation
 
 Edit the <conf/getting_started/prometheus.yml> file and replace the node_exporter's IP
-address (10.0.2.15) by the IP address of your host.
+address (10.0.2.15) by the IP address of your host. This configuration tells
+Prometheus to scrape metrics from 3 targets:
 
-Start Prometheus:
+* Prometheus itself
+* node_exporter
+* An fake instance that can't be reached.
+
+Now start Prometheus:
 
 ```
 docker run -d --name prometheus -p 127.0.0.1:9090:9090 \
@@ -32,11 +37,12 @@ docker run -d --name prometheus -p 127.0.0.1:9090:9090 \
   -v $PWD/conf/getting_started/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus:v2.0.0
 ```
 
-Go to <http://localhost:9090/> to open the Prometheus web UI.
+Go to <http://localhost:9090/> to access the Prometheus web UI.
 
-Visit the [Targets](http://localhost:9090/targets) and check that 3 targets are listed, node_exporter and prometheus should be UP.
+Visit the [Targets](http://localhost:9090/targets) and check that the 3 targets
+are listed, node_exporter and Prometheus should be UP.
 
-You can click on the endpoint addresses to view the exposed metrics.
+You can click on the Prometheus target link to view the exposed metrics.
 
 Go to the [Graph](http://localhost:9090/graph) and execute the following query:
 
@@ -45,8 +51,9 @@ up
 ```
 
 The `up` metric isn't found in the metrics exposed by the endpoints, it is
-instead added by Prometheus itself at every scrape. There are other metrics
-like `up`. To find them, execute the following query:
+instead added by Prometheus itself everytime it scrapes the target.
+
+There are other metrics like `up`. To find them, execute the following query:
 
 ```
 {job="unreachable"}
@@ -60,4 +67,3 @@ scrape_samples_post_metric_relabeling{instance="127.0.0.1:80",job="unreachable"}
 scrape_samples_scraped{instance="127.0.0.1:80",job="unreachable"}                 0
 up{instance="127.0.0.1:80",job="unreachable"}                                     0
 ```
-
