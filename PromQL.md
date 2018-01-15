@@ -24,7 +24,7 @@ Histogram and summary are related and offer different trade-offs. The main
 difference from a user's perspective is that histograms can be aggregated while
 summaries can't (in general).
 
-Visit again the metric endpoints and check the different metric types.
+*Exercise: visit again the metric endpoints and check the different metric types.*
 
 ### Prometheus query language (PromQL)
 
@@ -60,15 +60,53 @@ node_cpu{cpu="cpu0",mode="idle"}[5m]
 
 Again this expression isn't terribly useful by itself but this is where `rate()` comes to the rescue:
 
-
 ```
 rate(node_cpu{cpu="cpu0",mode="idle"}[5m])
 ```
 
-###
+*Exercise: write a query that returns the percentage of idle CPU time.*
+
+### More examples
+
+You can aggregate metric values by arbitrary dimensions using `by` or `without`:
+
+```
+sum(node_scrape_collector_duration_seconds) without (collector)
+```
+
+Those aggregation operators are familiar if you already know SQL. PromQL has also `min()`, `max()`, `avg()`, `count()` and [more](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators).
+
+*Exercise: write a query that returns the 5 collectors taking the most time to scrape.*
 
 
-* Prometheus data model (labels, instant and range vectors)
-* Operators (aggregation)
-* Vector matching
-* Functions
+PromQL also supports vector matching for binary and arithmethic operations. Lets generate invalid requests to Prometheus:
+
+```
+curl  localhost:9090/api/v1/query
+```
+
+And now we can ask Prometheus about the percentage of HTTP requests that returned a 400 status code.
+
+```
+100 * sum(rate(http_requests_total{code="400"}[5m])) / sum(rate(http_requests_total[5m]))
+```
+
+*Exercise: modify the query to compute the percentage of HTTP requests that returned a status code between 400 and 499.*
+
+Lets compute some percentiles now. The method depends on whether the metric is a summary or a histogram. Summaries can be recognized by their `quantile` label while histograms have a `le` label which represents the histogram's bucket (le = less or equal).
+
+```
+histogram_quantile(0.9, sum(rate(prometheus_tsdb_compaction_chunk_samples_bucket[24h])) by (job, le))
+```
+
+Summaries and histograms also track the sum and count of observed samples which can be used to compute the average value:
+
+```
+sum(rate(http_request_duration_microseconds_sum[5m])) by (job, handler)
+ /
+sum(rate(http_request_duration_microseconds_count[5m])) by (job, handler)
+```
+
+*Exercise: exclude the NaN values and convert to seconds.*
+
+[< Previous](GettingStarted.md) - [Next >](Alerting.md)
