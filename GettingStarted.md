@@ -37,6 +37,8 @@ docker run -d --name prometheus -p 127.0.0.1:9090:9090 \
   -v $PWD/conf/getting_started/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus:v2.0.0
 ```
 
+### Prometheus dashboard
+
 Go to <http://localhost:9090/> to access the Prometheus web UI.
 
 Visit the [Targets](http://localhost:9090/targets) and check that the 3 targets
@@ -67,3 +69,12 @@ scrape_samples_post_metric_relabeling{instance="127.0.0.1:80",job="unreachable"}
 scrape_samples_scraped{instance="127.0.0.1:80",job="unreachable"}                 0
 up{instance="127.0.0.1:80",job="unreachable"}                                     0
 ```
+
+You can check other metrics like for instance:
+
+```
+process_resident_memory_bytes
+```
+
+Note that we got 2 results here. Switch between *Console* & *Graph* and see what differs.
+
