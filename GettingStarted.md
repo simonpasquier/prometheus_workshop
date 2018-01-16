@@ -1,5 +1,11 @@
 ## Getting started
 
+First lets create a Docker network for our experiments.
+
+```
+docker create network prometheus
+```
+
 ### node_exporter installation
 
 [node_exporter](https://github.com/prometheus/node_exporter) is a program
@@ -32,7 +38,7 @@ Prometheus to scrape metrics from 3 targets:
 Now start Prometheus:
 
 ```
-docker run -d --name prometheus -p 127.0.0.1:9090:9090 \
+docker run -d --net prometheus --name prometheus -p 127.0.0.1:9090:9090 \
   -v $PWD/data:/prometheus \
   -v $PWD/conf/getting_started/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus:v2.0.0
 ```

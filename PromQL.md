@@ -1,3 +1,5 @@
+## PromQL
+
 ### Prometheus data model
 
 Everything's you need to know is very well explained in the (Prometheus
