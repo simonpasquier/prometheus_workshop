@@ -19,7 +19,7 @@ docker run -d --network prometheus --name prometheus -p 127.0.0.1:9090:9090 \
   -v $PWD/conf/alerting/rules.yml:/etc/prometheus/rules.yml prom/prometheus:v2.0.0
 ```
 
-_Exercise: Add a target to monitor the Grafana instance._
+_Exercise: Add a target file to monitor the Grafana instance._
 
 ### Relabeling
 
