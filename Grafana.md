@@ -20,7 +20,3 @@ Configure the Prometheus datasource pointing to <http://localhost:9090>.
 
 
 [< Previous](Alerting.md) - [Next >](ServiceDiscovery.md)
-
-* Installing Grafana.
-* Configuring the Prometheus datasource.
-* Writing a first dashboard.
