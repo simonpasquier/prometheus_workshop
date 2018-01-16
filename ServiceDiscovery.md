@@ -41,6 +41,6 @@ label should be equal to the filename minus the `.yml` suffix.
     target_label: job
 ```
 
-_Exercise: Add a relabel_config stanza to drop targets with._
+_Exercise: Add a relabel_config stanza to drop targets which have the `skip` label equal to `true`._
 
 [< Previous](Grafana.md) - [Next >](Instrumentation.md)
