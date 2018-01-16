@@ -2,8 +2,8 @@
 
 ### Prometheus data model
 
-Everything's you need to know is very well explained in the (Prometheus
-documentation)[https://prometheus.io/docs/concepts/data_model/].
+Everything's you need to know is very well explained in the [Prometheus
+documentation](https://prometheus.io/docs/concepts/data_model/).
 
 At its core, the data model represents time series as a metric name followed by
 a set of label names and values. Time series store timestamped float
@@ -12,7 +12,7 @@ values, the samples.
 One metric with different labels:
 
 ```
-process_resident_memory_bytes{instance="10.0.2.15:9100",job="node_exporter"}
+process_resident_memory_bytes{instance="192.168.1.17:9100",job="node_exporter"}
 process_resident_memory_bytes{instance="127.0.0.1:9090",job="prometheus"}
 ```
 

@@ -2,6 +2,8 @@
 
 ### AlertManager installation
 
+Start AlertManager:
+
 ```
 docker run -d --network prometheus --name alertmanager -p 127.0.0.1:9093:9093 \
   -v $PWD/conf/alerting/alertmanager.yml:/etc/alertmanager/config.yml  prom/alertmanager:v0.12.0

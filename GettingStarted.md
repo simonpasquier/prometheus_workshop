@@ -28,7 +28,7 @@ Go to <http://localhost:9100/> and check the results.
 ### Prometheus installation
 
 Edit the <conf/getting_started/prometheus.yml> file and replace the node_exporter's IP
-address (10.0.2.15) by the IP address of your host. This configuration tells
+address (192.168.1.17) by the IP address of your host. This configuration tells
 Prometheus to scrape metrics from 3 targets:
 
 * Prometheus itself
