@@ -4,10 +4,14 @@ import time
 
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, REGISTRY
 
 
 def metrics(self):
-    self.send_response(404)
+    self.send_response(200)
+    self.send_header('Content-type', CONTENT_TYPE_LATEST)
+    self.end_headers()
+    self.wfile.write(generate_latest(REGISTRY))
 
 
 def not_found(self):
