@@ -4,7 +4,10 @@ import time
 
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, REGISTRY
+from prometheus_client import generate_latest, CONTENT_TYPE_LATEST, REGISTRY, Histogram
+
+
+REQUEST_TIME = Histogram('request_latency_seconds', 'Time spent processing request')
 
 
 def metrics(self):
@@ -47,6 +50,7 @@ ROUTES = {
 # Class handling HTTP requests
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
+    @REQUEST_TIME.time()
     def do_GET(self):
         return ROUTES.get(self.path, not_found)(self)
 
