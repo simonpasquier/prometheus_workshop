@@ -18,6 +18,7 @@ scrape_configs:
   static_configs:
   - targets:
     - 127.0.0.1:9090
+    - alertmanager:9093
 - job_name: node_exporter
   metrics_path: /metrics
   scheme: http
