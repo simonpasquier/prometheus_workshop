@@ -43,6 +43,9 @@ docker run -d --net prometheus --name prometheus -p 127.0.0.1:9090:9090 \
   -v $PWD/conf/getting_started/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus:v2.0.0
 ```
 
+_If the container doesn't start because of file permissions, you need to change
+the ownership of the data/ directory to `65534:65534`._
+
 ### Prometheus dashboard
 
 Go to <http://localhost:9090/> to access the Prometheus web UI.
