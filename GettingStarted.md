@@ -3,7 +3,7 @@
 First lets create a Docker network for our experiments.
 
 ```
-docker create network prometheus
+docker network create prometheus
 ```
 
 ### node_exporter installation
@@ -14,7 +14,7 @@ that collects hardware and OS metrics for Prometheus.
 Start node_exporter:
 
 ```
-docker run -d --net=host --pid=host --name node_exporter prom/node-exporter:v0.15.2
+docker run -d -p 9100:9100 --name node_exporter prom/node-exporter:v0.15.2
 ```
 
 *node_exporter is usually not launched in Docker as it needs access to the
