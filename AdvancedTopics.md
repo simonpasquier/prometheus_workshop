@@ -38,9 +38,9 @@ _Exercise: write an alerting rule checking the validity of SSL certifcates._
 ### Pitfalls and gotchas
 
 * Instrumentation
-** Limit the number of values per label (a `user_id` label is probably a bad idea).
-** Avoid missing time series.
-** Respect the naming conventions.
+  * Limit the number of values per label (a `user_id` label is probably a bad idea).
+  * Avoid missing time series.
+  * Respect the naming conventions.
 * Avoid dropping labels in alerts.
 * Use the `for` clause in alerts and make it neither too short (< 1m) nor too long (> 1h).
 * Don't scrape targets sparsely. The maximum recommended scrape interval is 2
