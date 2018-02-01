@@ -1,21 +1,23 @@
+# Global scrape parameters
 global:
   scrape_interval: 30s
   scrape_timeout: 10s
 
 scrape_configs:
+# Job scraping Prometheus metrics
 - job_name: prometheus
   metrics_path: /metrics
   scheme: http
   static_configs:
   - targets:
     - 127.0.0.1:9090
+# Job scraping node_exporter metrics
 - job_name: node_exporter
   metrics_path: /metrics
   scheme: http
   static_configs:
   - targets:
-    # Replace 192.168.1.17 with the IP address of your host
-    - 192.168.1.17:9100
+    - 127.0.0.1:9100
 # Unreachable target intentionally configured to demonstrate the up metric and friends.
 - job_name: unreachable
   static_configs:

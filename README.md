@@ -3,20 +3,25 @@ Prometheus and AlertManager workshop.
 
 # Pre-requisites
 
-The workshop assumes that Docker is installed on your machine.
+1) Clone this repository.
 
-You can pull the following images in advance:
+2) Download the following binaries:
 
-* prom/prometheus:v2.0.0
-* prom/node-exporter:v0.15.2
-* prom/blackbox-exporter:v0.11.0
-* prom/alertmanager:v0.12.0
-* grafana/grafana:4.6.3
-* simonpasquier/instrumented_app:latest
+* prometheus
+* node-exporter
+* blackbox-exporter
+* alertmanager
 
-If Docker isn't an option, you can download the binaries from the
-[Prometheus](https://prometheus.io/download/) and
-[Grafana](https://grafana.com/grafana/download).
+Since these applications are written in Golang, the binaries are available for
+all major platforms from the [Prometheus](https://prometheus.io/download/).
+
+You also need to install [Grafana](https://grafana.com/grafana/download). The
+procedure depends on your operating system but again all major platforms are
+supported.
+
+3) Python3 and virtualenv are required for the "Instrumenting applications" part.
+
+Once downloaded, extract the archives and copy the executables to your PATH.
 
 # [Getting started with Prometheus](GettingStarted.md)
 

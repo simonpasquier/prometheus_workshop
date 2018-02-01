@@ -6,10 +6,10 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - alertmanager:9093
+      - 127.0.0.1:9093
 
 rule_files:
-  - rules.yml
+- rules.yml
 
 scrape_configs:
 - job_name: prometheus
@@ -18,17 +18,17 @@ scrape_configs:
   static_configs:
   - targets:
     - 127.0.0.1:9090
+    - 127.0.0.1:9093
 - job_name: node_exporter
   metrics_path: /metrics
   scheme: http
   static_configs:
   - targets:
-    # Replace 192.168.1.17 with the IP address of your host
-    - 192.168.1.17:9100
+    - 127.0.0.1:9100
 - job_name: file_sd
   file_sd_configs:
   - files:
-    - /etc/prometheus/targets/*.yml
+    - targets/*.yml
   relabel_configs:
   - source_labels:
     - __meta_filepath

@@ -1,26 +1,17 @@
 ## Getting started
 
-First lets create a Docker network for our experiments.
-
-```
-docker network create prometheus
-```
+All commands have to be executed in the `prometheus_workshop` directory.
 
 ### node_exporter installation
 
 [node_exporter](https://github.com/prometheus/node_exporter) is a program
 that collects hardware and OS metrics for Prometheus.
 
-Start node_exporter:
+Start node_exporter in a terminal:
 
 ```
-docker run -d -p 9100:9100 --name node_exporter prom/node-exporter:v0.15.2
+node_exporter
 ```
-
-*node_exporter is usually not launched in Docker as it needs access to the
-system host. For simplicity and consistency, we'll use Docker for everything so
-we need the `--net=host` and `--pid=host` flags here. Note that non-root mount
-points aren't visible to node_exporter unless bind-mounted to the container.*
 
 Go to <http://localhost:9100/> and check the results.
 
@@ -38,13 +29,8 @@ Prometheus to scrape metrics from 3 targets:
 Now start Prometheus:
 
 ```
-docker run -d --net prometheus --name prometheus -p 127.0.0.1:9090:9090 \
-  -v $PWD/data:/prometheus \
-  -v $PWD/conf/getting_started/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus:v2.0.0
+prometheus --config.file=conf/getting_started/prometheus.yml --storage.tsdb.path=./data/prometheus
 ```
-
-_If the container doesn't start because of file permissions, you need to change
-the ownership of the data/ directory to `65534:65534`._
 
 ### Prometheus dashboard
 

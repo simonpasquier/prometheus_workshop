@@ -6,8 +6,8 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - alertmanager-1:9093
-      - alertmanager-2:9093
+      - 127.0.0.1:9093
+      - 127.0.0.1:9094
 
 rule_files:
 - rules.yml
@@ -18,7 +18,13 @@ scrape_configs:
   scheme: http
   static_configs:
   - targets:
-    - prometheus-1:9090
-    - prometheus-2:9090
-    - alertmanager-1:9093
-    - alertmanager-2:9093
+    - 127.0.0.1:9090
+    - 127.0.0.1:9091
+    - 127.0.0.1:9093
+    - 127.0.0.1:9093
+- job_name: node_exporter
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
+    - 127.0.0.1:9100

@@ -5,8 +5,7 @@
 Start AlertManager:
 
 ```
-docker run -d --network prometheus --name alertmanager -p 127.0.0.1:9093:9093 \
-  -v $PWD/conf/alerting/alertmanager.yml:/etc/alertmanager/config.yml  prom/alertmanager:v0.12.0
+alertmanager --config.file=conf/alerting/alertmanager.yml --storage.path=data/alertmanager
 ```
 
 Start the web hook receiver:
@@ -19,11 +18,7 @@ docker run -d --network prometheus --name webhook -p 127.0.0.1:8080:8080 \
 Restart Prometheus with the updated configuration
 
 ```
-docker run -d --network prometheus --name prometheus -p 127.0.0.1:9090:9090 \
-  -v $PWD/data:/prometheus \
-  -v $PWD/conf/alerting/prometheus.yml:/etc/prometheus/prometheus.yml \
-  -v $PWD/conf/alerting/rules.yml:/etc/prometheus/rules.yml \
-  prom/prometheus:v2.0.0
+prometheus --config.file=conf/alerting/prometheus.yml --storage.tsdb.path=./data/prometheus
 ```
 
 Go to <http://localhost:9093/> to access the AlertManager web UI.

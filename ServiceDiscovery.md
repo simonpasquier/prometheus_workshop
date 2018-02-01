@@ -13,10 +13,7 @@ that many other service discovery mechanisms exist.
 Restart Prometheus with the updated configuration
 
 ```
-docker run -d --network prometheus --name prometheus -p 127.0.0.1:9090:9090 \
-  -v $PWD/data:/prometheus \
-  -v $PWD/conf/service_discovery/:/etc/prometheus/ \
-  -v $PWD/conf/alerting/rules.yml:/etc/prometheus/rules.yml prom/prometheus:v2.0.0
+prometheus --config.file=conf/service_discovery/prometheus.yml --storage.tsdb.path=./data/prometheus
 ```
 
 _Exercise: Add a target file to monitor the Grafana instance._

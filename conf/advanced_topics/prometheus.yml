@@ -26,7 +26,7 @@ scrape_configs:
     - source_labels: [__param_target]
       target_label: instance
     - target_label: __address__
-      replacement: blackbox_exporter:9115
+      replacement: 127.0.0.1:9115
     # deal with SSH targets
     - source_labels: [__param_target]
       target_label: __param_module

@@ -14,9 +14,7 @@ series, improving the response time for queries which are often executed.
 Start the blackbox_exporter service:
 
 ```
-docker run -d --net prometheus --name blackbox_exporter -p 127.0.0.1:9115:9115 \
-    -v $PWD/conf/advanced_topics/blackbox.yml:/etc/blackbox_exporter/config.yml \
-    prom/blackbox-exporter:v0.11.0
+blackbox_exporter --config.file=conf/advanced_topics/blackbox.yml
 ```
 
 Check that the service is working:
@@ -25,15 +23,13 @@ Check that the service is working:
 curl http://localhost:9115/probe?target=https://snowcamp.io
 ```
 
-Update the Prometheus container to scrape the blackbox_exporter:
+Restart the Prometheus service to scrape the blackbox_exporter:
 
 ```
-docker run -d --net prometheus --name prometheus -p 127.0.0.1:9090:9090 \
-  -v $PWD/data:/prometheus \
-  -v $PWD/conf/advanced_topics/prometheus.yml:/etc/prometheus/prometheus.yml  prom/prometheus:v2.0.0
+prometheus --config.file=conf/advanced_topics/prometheus.yml --storage.tsdb.path=./data/prometheus
 ```
 
-_Exercise: write an alerting rule checking the validity of SSL certifcates._
+_Exercise: write an alerting rule checking the validity of the SSL certifcate for `snowcamp.io`._
 
 ### Pitfalls and gotchas
 
