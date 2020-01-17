@@ -1,6 +1,7 @@
 global:
   scrape_interval: 30s
   scrape_timeout: 10s
+  evaluation_interval: 30s
 
 alerting:
   alertmanagers:
@@ -8,6 +9,7 @@ alerting:
     - targets:
       - 127.0.0.1:9093
       - 127.0.0.1:9094
+    api_version: v2
 
 rule_files:
 - rules.yml
@@ -21,7 +23,7 @@ scrape_configs:
     - 127.0.0.1:9090
     - 127.0.0.1:9091
     - 127.0.0.1:9093
-    - 127.0.0.1:9093
+    - 127.0.0.1:9095
 - job_name: node_exporter
   metrics_path: /metrics
   scheme: http

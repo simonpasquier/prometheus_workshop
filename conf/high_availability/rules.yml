@@ -1,7 +1,6 @@
 groups:
 - name: core
   rules:
-
   - alert: InstanceDown
     expr: up == 0
     for: 1m
@@ -9,4 +8,4 @@ groups:
       severity: page
     annotations:
       summary: "Instance {{ $labels.instance }} down"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute."

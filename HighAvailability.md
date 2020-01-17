@@ -13,8 +13,8 @@ Deploy the second instance
 
 ```
 alertmanager --config.file=conf/alerting/alertmanager.yml --storage.path=data/alertmanager2 \
-  --mesh.peer=127.0.0.1:6783 --mesh.listen-address=127.0.0.1:6784 --mesh.peer-id=00:00:00:00:00:02 \
-  --web.listen-address=:9094
+  --cluster.peer=127.0.0.1:9094 --cluster.listen-address=127.0.0.1:9096 \
+  --web.listen-address=:9095
 ```
 
 *Exercise: create a silence on the second AlertManager instance. Check that it
