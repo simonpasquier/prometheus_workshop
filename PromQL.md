@@ -14,14 +14,14 @@ values to be precise) associated to a timeseries at a given timestamp.
 Here is the representation of a metric with different labels:
 
 ```
-process_resident_memory_bytes{instance="192.168.1.17:9100",job="node_exporter"}
+process_resident_memory_bytes{instance="127.0.0.1:9100",job="node_exporter"}
 process_resident_memory_bytes{instance="127.0.0.1:9090",job="prometheus"}
 ```
 
 The type of a metric can be one of:
-* Counter (`node_cpu`)
-* Gauge (`node_memory_MemFree`)
-* Histogram (`prometheus_tsdb_compaction_chunk_size_bucket`)
+* Counter (`node_cpu_seconds_total`)
+* Gauge (`node_memory_MemFree_bytes`)
+* Histogram (`prometheus_http_request_duration_seconds`)
 * Summary (`go_gc_duration_seconds`)
 
 Histogram and summary are related and offer different trade-offs. The main
@@ -97,9 +97,10 @@ topk(5, node_scrape_collector_duration_seconds)
 PromQL also supports vector matching for binary and arithmethic operations. Lets generate invalid requests to Prometheus:
 
 ```
-for i in $(seq 0 9); do \
+for i in {1..10}; do \
   curl localhost:9090/api/v1/query; \
-  curl localhost:9090/notfound; \
+  curl localhost:9090/static/notfound; \
+  sleep 5
 done
 ```
 
