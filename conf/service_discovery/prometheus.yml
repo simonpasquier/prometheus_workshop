@@ -1,12 +1,14 @@
 global:
   scrape_interval: 30s
   scrape_timeout: 10s
+  evaluation_interval: 30s
 
 alerting:
   alertmanagers:
   - static_configs:
     - targets:
       - 127.0.0.1:9093
+    api_version: v2
 
 rule_files:
 - rules.yml
@@ -29,9 +31,3 @@ scrape_configs:
   file_sd_configs:
   - files:
     - targets/*.yml
-  relabel_configs:
-  - source_labels:
-    - __meta_filepath
-    regex: .*/([^/]+).yml
-    action: replace
-    target_label: job
