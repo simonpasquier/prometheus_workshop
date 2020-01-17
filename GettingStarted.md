@@ -18,19 +18,18 @@ Go to <http://localhost:9100/> and check the results.
 
 ### Prometheus installation
 
-Edit the <conf/getting_started/prometheus.yml> file and replace the node_exporter's IP
-address (192.168.1.17) by the IP address of your host. This configuration tells
-Prometheus to scrape metrics from 3 targets:
-
-* Prometheus itself
-* node_exporter
-* An fake instance that can't be reached.
-
-Now start Prometheus:
+Start Prometheus in another terminal:
 
 ```
 prometheus --config.file=conf/getting_started/prometheus.yml --storage.tsdb.path=./data/prometheus
 ```
+
+The [configuration file](conf/getting_started/prometheus.yml) tells Prometheus to scrape metrics from 3 targets:
+
+* Prometheus itself.
+* node_exporter (running on localhost).
+* An fake instance that can't be reached.
+
 
 ### Prometheus dashboard
 
@@ -62,6 +61,7 @@ It should return something similar to:
 scrape_duration_seconds{instance="127.0.0.1:80",job="unreachable"}                0.003171684
 scrape_samples_post_metric_relabeling{instance="127.0.0.1:80",job="unreachable"}  0
 scrape_samples_scraped{instance="127.0.0.1:80",job="unreachable"}                 0
+scrape_series_added{{instance="127.0.0.1:80",job="unreachable"}                   0
 up{instance="127.0.0.1:80",job="unreachable"}                                     0
 ```
 
