@@ -79,7 +79,7 @@ rate(node_cpu_seconds_total{cpu="0"}[5m])
 You can aggregate metric values by arbitrary dimensions using `by` or `without`:
 
 ```
-sum(node_scrape_collector_duration_seconds) without (collector)
+sum without(collector) (node_scrape_collector_duration_seconds)
 ```
 
 Those aggregation operators are familiar if you already know SQL. PromQL has also `min()`, `max()`, `avg()`, `count()` and [more](https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators).
@@ -98,8 +98,10 @@ PromQL also supports vector matching for binary and arithmethic operations. Lets
 
 ```
 for i in {1..10}; do \
-  curl localhost:9090/api/v1/query; \
-  curl localhost:9090/static/notfound; \
+  # generate 400 status code response \
+  curl localhost:9090/api/v1/query;
+  # generate 404 status code response \
+  curl localhost:9090/static/notfound;
   sleep 5
 done
 ```
@@ -143,20 +145,20 @@ histogram_quantile(0.9, rate(prometheus_http_response_size_bytes_bucket{handler=
 Summaries and histograms also track the sum and count of observed samples which can be used to compute mean values:
 
 ```
-sum(rate(prometheus_http_request_duration_seconds_sum[5m])) by (job, handler)
+sum by(job,handler) (rate(prometheus_http_request_duration_seconds_sum[5m]))
  /
-sum(rate(prometheus_http_request_duration_seconds_count[5m])) by (job, handler)
+sum by(job,handler) (rate(prometheus_http_request_duration_seconds_count[5m]))
 ```
 
-*Exercise: exclude the NaN values.*
+*Exercise: understand why the result contains NaN values and find a way to exclude them.*
 
 <details>
   <summary>Solution</summary>
 
 ```
-sum(rate(prometheus_http_request_duration_seconds_sum[5m])) by (job, handler)
+sum by(job,handler) (rate(prometheus_http_request_duration_seconds_sum[5m]))
  /
-( sum(rate(prometheus_http_request_duration_seconds_count[5m])) by (job, handler) > 0 )
+( sum by(job,handler) (rate(prometheus_http_request_duration_seconds_count[5m])) > 0 )
 
 ```
 </details>

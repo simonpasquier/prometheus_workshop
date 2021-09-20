@@ -28,8 +28,7 @@ The [configuration file](conf/getting_started/prometheus.yml) tells Prometheus t
 
 * Prometheus itself.
 * node_exporter (running on localhost).
-* An fake instance that can't be reached.
-
+* A "fake" instance that can't be reached.
 
 ### Prometheus dashboard
 

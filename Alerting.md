@@ -12,7 +12,7 @@ Start the web hook receiver:
 
 ```
 docker run -d --network prometheus --name webhook -p 127.0.0.1:8080:8080 \
-  simonpasquier/http_logger
+  quay.io/simonpasquier/http_logger
 ```
 
 Restart Prometheus with the updated configuration

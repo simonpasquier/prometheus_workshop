@@ -17,10 +17,10 @@ scrape_configs:
     module: [http_2xx]
   static_configs:
   - targets:
-    - https://www.snowcamp.io
+    - https://www.devoxx.fr
     - https://www.google.com
     - http://example.com
-    - http://10.0.0.1
+    - http://127.0.0.1:9999
   relabel_configs:
     - source_labels: [__address__]
       target_label: __param_target

@@ -5,7 +5,8 @@ For this exercise, we'll use a very simple web application available [here](http
 ```
 git clone https://github.com/simonpasquier/simple_flask_application
 cd simple_flask_application
-virtualenv .
+python3 -m venv venv
+. venv/bin/activate
 pip install -r requirements.txt
 HTTP_PORT=8000 ./run.sh
 ```

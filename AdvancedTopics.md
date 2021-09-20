@@ -20,7 +20,7 @@ blackbox_exporter --config.file=conf/advanced_topics/blackbox.yml
 Check that the service is working:
 
 ```
-curl http://localhost:9115/probe?target=https://snowcamp.io
+curl http://localhost:9115/probe?target=https://www.devoxx.fr
 ```
 
 Restart the Prometheus service to scrape the blackbox_exporter:
