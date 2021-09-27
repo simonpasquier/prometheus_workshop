@@ -3,8 +3,33 @@ route:
   group_wait: 10s
   group_interval: 1m
   repeat_interval: 5m
-  receiver: 'web.hook'
+  receiver: 'default'
+  routes:
+  # all alerts from node-exporter go the infra team.
+  # they are grouped by instance.
+  - matchers:
+    - job="node-exporter"
+    receiver: infra
+    group_by: [instance]
+  # all alerts from prometheus and alertmanager go the infra team.
+  # they are grouped by job.
+  - matchers:
+    - job=~"prometheus|alertmanager"
+    receiver: monitoring
+    routes:
+    # don't notify for PrometheusRemoteWriteDesiredShards.
+    - matchers:
+      - alertname="PrometheusRemoteWriteDesiredShards"
+      - job="prometheus"
+      receiver: void
 receivers:
-- name: 'web.hook'
+- name: 'infra'
   webhook_configs:
   - url: 'http://localhost:8080/'
+- name: 'monitoring'
+  webhook_configs:
+  - url: 'http://localhost:8080/'
+- name: 'default'
+  webhook_configs:
+  - url: 'http://localhost:8080/'
+- name: 'void'

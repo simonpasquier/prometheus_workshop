@@ -1,7 +1,7 @@
 global:
-  scrape_interval: 30s
+  scrape_interval: 10s
   scrape_timeout: 10s
-  evaluation_interval: 30s
+  evaluation_interval: 10s
 
 alerting:
   alertmanagers:
@@ -11,7 +11,8 @@ alerting:
     api_version: v2
 
 rule_files:
-- rules.yml
+- "*rules.y*ml"
+- "*_alerts.y*ml"
 
 scrape_configs:
 - job_name: prometheus
@@ -20,6 +21,11 @@ scrape_configs:
   static_configs:
   - targets:
     - 127.0.0.1:9090
+- job_name: alertmanager
+  metrics_path: /metrics
+  scheme: http
+  static_configs:
+  - targets:
     - 127.0.0.1:9093
 - job_name: node_exporter
   metrics_path: /metrics
