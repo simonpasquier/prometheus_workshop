@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+    app: example-app
+    team: frontend
+  name: example-app
+spec:
+  groups:
+  - name: example
+    rules:
+    - alert: ExampleAppTooManyNotFound
+      expr: 'sum(rate(http_requests_total{code="404"}[5m])) / sum(rate(http_requests_total[5m])) > 0.01'
+      labels:
+        severity: warning

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app
+  labels:
+    team: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-app
+  template:
+    metadata:
+      labels:
+        app: example-app
+    spec:
+      containers:
+      - name: example-app
+        image: ghcr.io/rhobs/prometheus-example-app:0.3.0
+        ports:
+        - name: web
+          containerPort: 8080

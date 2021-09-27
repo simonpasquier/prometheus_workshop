@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: example
+spec:
+  serviceAccountName: prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      team: frontend
+  ruleSelector:
+    matchLabels:
+      team: frontend
+  resources:
+    requests:
+      memory: 400Mi
+  replicas: 1
