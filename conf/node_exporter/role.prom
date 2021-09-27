@@ -1,0 +1,3 @@
+# HELP node_role Role of the node
+# TYPE node_role gauge
+node_role{role="monitoring"} 1
